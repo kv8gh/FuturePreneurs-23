@@ -115,7 +115,7 @@
       },
       "ans": {
        "optionsType": "text", 
-        "optionsContent": ["i,ii,iv,iii","iv,iii,ii","ii,iii,i,iv","iii,ii,i,iv"]
+        "optionsContent": ["i,ii,iv,iii","iv,iii,ii,i","ii,iii,i,iv","iii,ii,i,iv"]
       }
     },
     {
@@ -400,7 +400,7 @@
           "questionType":"single",
           "contentType":"audio",
           "contentLink":"https://utfs.io/f/697ccc5c-31c2-4d92-905f-765aeb6bad94-evxp2c.m4a",
-          "content":"Listen to the audio and answer:"
+          "content":"Listen to the audio and answer \n (In case of audio player not functioning properly, reload the page once.)"
         },
         "ans":{
           "optionsType":"text",
@@ -413,7 +413,7 @@
         "questionType":"single",
         "contentType":"audio",
         "contentLink":"https://utfs.io/f/916093ae-2dca-4dc6-94f5-abb2d6393f46-evxp2b.m4a",
-        "content":"Audio Question #1"
+        "content":"Audio Question #1 \n(In case of audio player not functioning properly, reload the page once.)"
       },
       "ans":{
         "optionsType":"text",
@@ -425,7 +425,7 @@
         "questionType":"single",
         "contentType":"audio",
         "contentLink":"https://utfs.io/f/0978f9e9-a5f7-4b2d-b634-39bf4d3aa6ec-evxp2a.m4a",
-        "content":"Audio Question #2 \n Matching: Match the funding source with its description. \nI - Venture Capital\nII -Angel Investor\nIII - Crowdfunding"
+        "content":"Audio Question #2 \n Matching: Match the funding source with its description. \nI - Venture Capital\nII -Angel Investor\nIII - Crowdfunding\n\n(In case of audio player not functioning properly, reload the page once.)"
       },
       "ans":{
         "optionsType":"text",
@@ -631,7 +631,7 @@
       "questionType": "single",
       "contentType": "audio",
       "contentLink": "https://utfs.io/f/eb2704cb-6925-4e4b-8c85-98d4bd620403-zbc95z.mp3",
-      "content": "Identify which founder spoke the following words via the audio clip"
+      "content": "Identify which founder spoke the following words via the audio clip \n(In case of audio player not functioning properly, reload the page once.)"
     },
     "ans":{
       "optionsType":"text",
@@ -643,7 +643,7 @@
       "questionType": "single",
       "contentType": "audio",
       "contentLink": "https://utfs.io/f/c1fbec91-6c3a-406e-995e-21d86465fd49-zbc95y.mp3",
-      "content": "Listen to the audio and answer"
+      "content": "Listen to the audio and answer \n(In case of audio player not functioning properly, reload the page once.)"
     },
     "ans":{
       "optionsType":"text",
@@ -655,7 +655,7 @@
       "questionType": "single",
       "contentType": "audio",
       "contentLink": ["https://utfs.io/f/47af7eba-0dfd-4041-b5d1-bfbe8d63be9c-r0lazw.m4a","https://utfs.io/f/ef42098e-626b-4882-ade8-357d372d12c5-ucpfbs.m4a"],
-      "content": "Listen to the audio clip to answer assertion and reason"
+      "content": "Listen to the audio clip to answer assertion and reason \n(In case of audio player not functioning properly, reload the page once.)"
     },
     "ans":{
       "optionsType":"text",
@@ -765,7 +765,7 @@
         "questionType": "single",
         "contentType": "image",
         "contentLink": "https://res.cloudinary.com/dhrvr4sey/image/upload/v1705337221/FP/hard-8_dsdjdn.png",
-        "content":" Find the operating expense ratio for the geographic region which Tibet is a part of. (for December 23’)"
+        "content":" Find the operating expense ratio for the geographic region which Tibet is a part of. (for December 23')"
       },
       "ans":{
         "optionsType":"text",
@@ -801,7 +801,7 @@
         "questionType": "multiple",
         "contentType": "text",
         "contentLink": "",
-        "content":"Settling for lower salaries in the competitor airlines and breaching the contract, for the sake of resigning, why do you think such a mass chaotic resignation of pilots occurred for Akasa airlines, which led India’s affordable airline to 1.17% cancellation rates and great customer dissatisfaction?(Multiple correct)"
+        "content":"Settling for lower salaries in the competitor airlines and breaching the contract, for the sake of resigning, why do you think such a mass chaotic resignation of pilots occurred for Akasa airlines, which led India's affordable airline to 1.17% cancellation rates and great customer dissatisfaction?(Multiple correct)"
       },
       "ans":{
         "optionsType":"text",
@@ -837,7 +837,7 @@
         "questionType": "single",
         "contentType": "text",
         "contentLink": "",
-        "content":"X is a company that started in 1921 in Boston and the name was an expression for a petite wooden structure intricately constructed to house the radio apparatus of a maritime vessel. This company was purchased by leather goods corporation in 1962 for about US$300,000. In mid 1990’s this company endeavored to transitioned from niche components to broader consumer markets, with a specific emphasis on promoting wireless phones. It was delisted  from the NYSE in 2015 and subsequently in 2017 filed for bankruptcy "
+        "content":"X is a company that started in 1921 in Boston and the name was an expression for a petite wooden structure intricately constructed to house the radio apparatus of a maritime vessel. This company was purchased by leather goods corporation in 1962 for about US$300,000. In mid 1990's this company endeavored to transitioned from niche components to broader consumer markets, with a specific emphasis on promoting wireless phones. It was delisted  from the NYSE in 2015 and subsequently in 2017 filed for bankruptcy "
       },
       "ans":{
         "optionsType":"text",
@@ -885,7 +885,7 @@
         "questionType": "single",
         "contentType": "text",
         "contentLink": "",
-        "content":"Company X in the fast fashion sector has a high dividend payout ratio of 1.68 for the year 2023 and average Dividends Per Share Growth Rate of -33.30% has next year’s dividend of 1. Identify the Z  growth model which is used to determine the intrinsic value of a stock based on a future series of dividends that grow at a constant rate , to calculate the discount rate(%)  when the given stock value is $16.55."
+        "content":"Company X in the fast fashion sector has a high dividend payout ratio of 1.68 for the year 2023 and average Dividends Per Share Growth Rate of -33.30% has next year's dividend of 1. Identify the Z  growth model which is used to determine the intrinsic value of a stock based on a future series of dividends that grow at a constant rate , to calculate the discount rate(%)  when the given stock value is $16.55."
        },
       "ans":{
         "optionsType":"text",

@@ -10,11 +10,16 @@ import { useEffect, useState } from "react";
 import Instructions from "@/Components/Qualifier/Instructions";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import QuizEnd from "@/Components/Qualifier/QuizEnd";
+import LoadingIcons from "react-loading-icons";
 
 export default function QualifierPage() {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [questionCategory, setQuestionCategory] = useState('instruction');
   const [finalAnswer, setFinalAnswer] = useState([]);
+  const [changeOption,setChangeOption] = useState(false)
+  const [teamName, setTeamName] = useState()
+  const [loading, setLoading] = useState(false);
 
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -22,9 +27,10 @@ export default function QualifierPage() {
   useEffect(() => {
     if (router.isReady) {
       if (status === 'unauthenticated') {
+        console.log('Authenticated000000000000000000000000=======');
         router.push('/');
       } else if (status === 'authenticated') {
-        console.log('Authenticated', session);
+        console.log('Authenticated000000000000000000000000', session);
         GetQuestionNumber();
         checkCurrentQualifier();
       }
@@ -32,6 +38,7 @@ export default function QualifierPage() {
   }, [status, router]);
 
   const submitAnswer = () => {
+    setLoading(true);
     fetch('/api/levels/qualifier/submitAnswer', {
       method: 'POST',
       headers: {
@@ -44,6 +51,8 @@ export default function QualifierPage() {
       .then((res) => res.json())
       .then((data) => {
         setFinalAnswer([]);
+        setChangeOption((prev)=>!prev)
+        setLoading(false);
         GetQuestionNumber();
       })
       .catch((err) => {
@@ -78,6 +87,7 @@ export default function QualifierPage() {
       }
     });
   };
+
   function GetQuestionNumber() {
     fetch('/api/levels/qualifier/getQuestionData', {
       method: 'GET',
@@ -87,10 +97,17 @@ export default function QualifierPage() {
         'Access-Control-Allow-Origin': '*',
       },
     })
-      .then((res) => res.json())
+      .then((res) => {if (res.status===400){
+          setQuestionCategory('waiting')
+        } else {
+          return res.json()
+        }
+      })
       .then((data) => {
+        console.log('data', data)
         setQuestionNumber(data.questionNumber);
         setQuestionCategory(data.category);
+        setTeamName(data.teamName);
       })
       .catch((err) => {
         console.log(err);
@@ -101,17 +118,19 @@ export default function QualifierPage() {
     <main className="min-h-screen bg-[url('/assets/landingPage/bg.svg')]">
       {/* <Image src={bg} alt="bgImage" fill className="object-cover z-[-10]" /> */}
       {questionCategory === 'waiting' && (
-        <Waiting text={'Wait!!! Quiz will start in few minutes'} />
+        
+        <QuizEnd/>
       )}
       {questionCategory === 'instruction' && (
         <Instructions/>
+        
       )}
       {questionCategory !== "instruction" && questionCategory !== "waiting" && (
     
         <div>
           <Navbar
             sendData={submitAnswer}
-            teamName={"Team 1"}
+            teamName={teamName}
             level="qualifier"
           />
           <section className="flex gap-4 mt-4 justify-center">
@@ -129,6 +148,7 @@ export default function QualifierPage() {
               }
               setFinalAnswer={setFinalAnswer}
               finalAnswer={finalAnswer}
+              changeOption={changeOption}
             />
             {(questionCategory === "caseStudy" && questionNumber === 3) ? (
               <button
@@ -141,10 +161,11 @@ export default function QualifierPage() {
             ) : (
               <button
                 type="button"
-                className="text-white w-1/6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                disabled={loading}
+                className="text-center text-white w-1/6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
                 onClick={() => submitAnswer()}
               >
-                Next
+                {loading ? <LoadingIcons.Oval className="w-full" height={"20px"}/> : "Next"}
               </button>
             )}
             </div>

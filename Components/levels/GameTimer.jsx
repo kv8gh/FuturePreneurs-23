@@ -1,30 +1,39 @@
 import { useSession } from "next-auth/react";
 import React, { useState, useEffect } from "react";
-
+import { useRouter } from "next/router";
 export default function GameTimer(props) {
   // const currentTime = new Time.now();
   const [endTime, setEndTime] = useState(Date.now());
 
   const { data: session, status } = useSession();
 
+  const router = useRouter();
   useEffect(() => {
-    fetch(`/api/levels/${props.level}/getTime`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.accessTokenBackend}`,
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data for time", data);
-        setEndTime(data.endTime);
-      })
-      .catch((err) => {
-        console.log("error=>", err);
-      });
-  }, []);
+    if (router.isReady) {
+      if (status === 'unauthenticated') {
+        console.log('Authenticated000000000000000000000000=======');
+        router.push('/');
+      } else if (status === 'authenticated') {
+        fetch(`/api/levels/${props.level}/getTime`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.accessTokenBackend}`,
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("data for time", data);
+            setEndTime(data.endTime);
+          })
+          .catch((err) => {
+            console.log("error=>", err);
+          });
+      }
+    }
+  }, [status, router]);
+
 
   const calculateTimeRemaining = () => {
     const now = new Date().getTime();
@@ -38,6 +47,7 @@ export default function GameTimer(props) {
 
     if (Math.floor(timeDiff / 1000) <= 0) {
       props.sendData();
+      location.reload();
     }
 
     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
