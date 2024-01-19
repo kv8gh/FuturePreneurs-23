@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Router from "next/router";
 import Waiting from "@/Components/levels/Waiting";
 import Game1 from "@/Components/levels/level1/game";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Navbar from "@/Components/Navbar";
+import Instructions from "@/Components/levels/level1/instruction";
 
 export default function Level1() {
 
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [problems,setProblems] = useState([]);
+  const [level1Answer,setLevel1Answer] = useState({});
+  const [sector,setSector] = useState(0);
+
   useEffect(() => {
     if (router.isReady) {
       if (status === 'unauthenticated') {
@@ -24,6 +29,26 @@ export default function Level1() {
 
   const [curPage, setCurPage] = useState(-1);
 
+  function submitAnswerForLevel1(){
+    fetch('/api/levels/level1/sendData',{
+      method:'POST',
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.accessTokenBackend}`,
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({answer:level1Answer}),
+    }).then((res) => res.json())
+    .then(()=>{
+      console.log('clicked')
+      location.reload()
+    })
+    .then(console.log(level1Answer))
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   const checkCurrentLevel1 = () => {
     fetch("/api/levels/checkCurrentRound", {
       method: "GET",
@@ -35,12 +60,8 @@ export default function Level1() {
     }).then((res) => {
       if (res.status === 200) {
         res.json().then((data) => {
-          console.log("data", data);
-          // setCurPage(data.team.pageNo);
-          console.log(data.round.level);
           if (data.round.level !== 1) {
-            // redirect(`/levels/level${data.round.level}`)
-            Router.push(`/levels/level${data.round.level}`);
+            router.push(`/levels/level${data.round.level}`);
           }
         });
       } else {
@@ -62,8 +83,12 @@ export default function Level1() {
       if (res.status === 200) {
         res.json().then((data) => {
           console.log("data", data);
-          setCurPage(data.team.pageNo);
-          console.log(data.team.pageNo);
+          // setCurPage(data.team.pageNo);
+          console.log("!!!!!!a",data)
+          setCurPage(data.pageNo);
+          setProblems(data.problems);
+          setSector(data.newspaperset);
+          // console.log(data.team.pageNo);
         });
       } else {
         console.log("error");
@@ -73,12 +98,12 @@ export default function Level1() {
 
   return (
     <div>
-      {curPage === -1 && <Waiting text={"Please Wait for Level 1 to start"} />}
+      {curPage === -1 && <Waiting text={"Please Wait for Level 2 to start"} />}
       {/* {curPage === 0 && <Instructions/>} */}
-      {curPage === 0 && <Waiting text={"Instruction"} />}
-      {curPage === 1 && <Game1 />}
-      {curPage === 2 && <Waiting text={"Prompt"} />}
-      {curPage === 3 && <Waiting text={"Level 1 is ended"} />}
+      {curPage === 0 && <Instructions/>}
+      {curPage === 1 && <Game1 setLevel1Answer={setLevel1Answer} level1Answer={level1Answer} sector={sector} submit={submitAnswerForLevel1} problems={problems}/>}
+      {curPage === 2 && <Waiting text={"Level 2 is ended"} />}
+      {curPage === 3 && <Waiting next={'2'} text={"Level 2 is ended"} />}
       {/* {curPage === 2 && <Prompt/>} */}
     </div>
   );
